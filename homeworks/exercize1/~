@@ -1,0 +1,106 @@
+#include <stdio.h>
+
+/* I suggest you to play with getchar, scanf, printf functions to understand how they 
+   handle values */
+int x = 100000000;
+
+void print_many_words()
+{
+	printf("biskiiiiiiiiiiiiiiiiiii\n\r");
+	printf("biskiiiiiiiiiiiiiiiiiii\n\r");
+	printf("biskiiiiiiiiiiiiiiiiiii\n\r");
+	printf("biskiiiiiiiiiiiiiiiiiii\n\r");
+	printf("biskiiiiiiiiiiiiiiiiiii\n\r");
+	printf("biskiiiiiiiiiiiiiiiiiii\n\r");
+	printf("biskiiiiiiiiiiiiiiiiiii\n\r");
+	return;
+}
+
+int add_x_y(int a, int b)
+{
+	int ret_value = 0;
+	printf("x inside function add_x_y = %d\n\r", x);
+	ret_value = a + b;
+	return ret_value;
+}
+char add_char_x_y(char a, char b)
+{
+	char ret_value = 0;
+	//int x = 5000;
+	ret_value = a + b;
+	return ret_value;
+}
+
+int main()
+{
+ 
+  char array[10] = {0};
+  char *p;
+  array[0] =10;
+  array[1]=20;
+  p = &array[0];
+
+  int x = 1000;
+  int y = 2000;
+  int z = 0;
+  char c = 0;
+ // y = (char)x;
+ // printf("valuu of y = %d\n\r", y);
+  
+
+  //printf("value in array[0] = %d\n\r", array[0]);
+  //printf("address of array[0] = %lu\n\r", (int)&array[0]);
+  //printf("value in array[0] = %d\n\r", (int)*p);
+  //printf("address in array[0] = %lu\n\r", (int)p);
+
+  z = add_x_y(x, y);
+  c = z;
+
+  printf("z = %d\n\r", z);
+  printf("c = %ld\n\r", c);
+  printf("x in main function = %lu\n\r", x);
+  //printf("y = %lu\n\r", y);
+   print_many_words(x);
+
+
+  
+  
+
+ 
+ #if 0
+ /* Bishki - getchar is used to get the char values as entered on keyboard, like '1', '2', 'a', 'b'...
+      The exact value you'll get is actually a special number (ASCII) used to represent the character
+	  for example:
+	  char c = getchar();
+	  if you enter 'a' on the keyboard, c will get the (ASCII) value that represnets 'a' which is 97 
+	  so if you are using getchar you always have the char values ...
+	  If you like to convert (format) the input/output to other values like integers, double, strings, then
+	  you can use functions like scanf, printf, etc... (f=format)*/
+
+	char c;
+	char s[100] = {0}; /* put 0 in all 100 chars */
+	int i = 0;
+	double d;
+   
+	/* try to enter '3', '333333', '0', '9' */
+	printf("Enter a value :");
+	c = getchar( );
+
+	printf("\nChar value entered: %c\n", c);
+	printf("\nINT value entered: %d\n", c);
+
+	/* try to enter '123456' */
+	printf("Enter a value :");
+	scanf("%lf", &d);
+    printf("double is: %lf\n\r", d);
+	printf("\n\rValue entered is:");
+	while (s[i] != 0)
+	{
+		putchar(s[i]);
+		i++;
+	}
+	printf("\n");
+#endif	
+
+	return 0;
+}

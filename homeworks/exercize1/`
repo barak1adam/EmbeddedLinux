@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main()
+{
+   //int c;
+
+   //printf( "Enter a value :");
+   //c = getchar( );
+
+   //printf( "\nYou entered: ");
+   //putchar( c );
+   //printf("\n");
+  char str[100];
+
+   printf( "Enter a value :");
+   gets( str );
+
+   printf( "\nYou entered: ");
+   puts( str );
+   printf("\n");
+#if 0	
+	printf("Embedded Linux Exercise 1\n\r");
+	printf("=========================\n\r");
+	func1();
+	func2();
+	func3("/home/mrv/mrv");
+	func4();
+	//func5();
+	func6();
+#endif
+	return 0;
+}

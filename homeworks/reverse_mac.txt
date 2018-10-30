@@ -1,0 +1,27 @@
+/* ifconfig: reversing the MAC.
+add this code in line 698 */
+#if 0
+	{
+		char *str =  hw->print((unsigned char *)ptr->hwaddr);
+		char *rev = NULL;
+		int k,j,len;
+		k = len = strlen(str);
+		rev = (char *)malloc(len);
+		if (rev)
+		{
+			memset(rev, 0, len);
+			for(j = 0; j < len; j++)
+			{
+			   rev[j] = str[k-1];
+			   k--;
+			}
+			printf(_("HWaddr %s  "), rev);
+			free(rev);
+		}
+		else
+		{
+			printf(_("HWaddr %s  "), hw->print((unsigned char *)ptr->hwaddr));
+		}
+	}
+#endif
+
