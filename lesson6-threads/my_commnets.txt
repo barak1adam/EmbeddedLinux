@@ -1,0 +1,23 @@
+When a Linux process is terminated all its resources are cleaned, threads are terminated immediately.
+
+When a process exits, the kernel cleans up all of the resources that it created on the
+process’ behalf that are no longer in use. This includes, but is not limited to, allo-
+cated memory, open files, and System V semaphores. After cleanup, the kernel
+destroys the process and notifies the parent of its child’s demise.
+
+Any of the threads in the process calls exit(3), or the main thread
+         performs a return from main().  This causes the termination of all
+         threads in the process.
+
+Join lets you wait to all threads to finish their jobs, but no risk of accessing memory
+which is already released !
+
+/* Wait till threads are complete before main continues. Unless we  */
+     /* wait we run the risk of executing an exit which will terminate   */
+     /* the process and all threads before the threads have completed.   *		 
+
+Only when a terminated joinable thread has been joined are the last of its
+       resources released back to the system.  When a detached thread
+       terminates, its resources are automatically released back to the
+       system: it is not possible to join with the thread in order to obtain
+       its exit status.	 

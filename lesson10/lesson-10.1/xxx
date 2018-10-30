@@ -1,0 +1,24 @@
+SERV_OBJS = shared_mem_server.o sys_v_sem.o
+CLIENT_OBJS = shared_mem_client.o sys_v_sem.o
+ 
+HDRS = Sys_V_Sem.h 
+
+shared_server: $(SERV_OBJS)
+	gcc $(SERV_OBJS) -ggdb -o shared_server 
+
+shared_client: $(CLIENT_OBJS)
+	gcc $(CLIENT_OBJS) -ggdb -o shared_client
+
+shared_sem_server.o: shared_mem_server.c $(HDRS)
+	gcc -c shared_mem_server.c -ggdb
+
+shared_sem_client.o: shared_mem_client.c $(HDRS)
+	gcc -c shared_mem_client.c -ggdb
+
+sys_v_sem.o: Sys_V_Sem.c $(HDRS)
+	gcc -c Sys_V_Sem.c -ggdb
+
+PHONY : clean
+
+clean :
+	rm *.o

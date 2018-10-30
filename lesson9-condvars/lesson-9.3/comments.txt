@@ -1,0 +1,54 @@
+In multi-threaded programs, it is often useful for a thread to wait for some condition to become true before proceeding.
+The simple approach,of just spinning until the condition becomes true, is grossly inefficient
+and wastes CPU cycles, and in some cases, can be incorrect.
+
+First porgram: without_c_v.c is very inefficient !
+
+
+thread A:														#		thread B:
+																#
+do job until some real condition ocuur (e.g. job q is empty)	#		do work
+/* critical section start - access the Q */
+to check the Q, lock the mutex									#		lock the mutex
+wait on cond var:												#
+	automatically unlock mutex									#
+	block, waiting for signal from thread B						#
+																#		change the real condition - put a job in the Q
+																#		signal thread A
+																#
+																#		unlock the mutex
+	when signaled:												#
+	mutex is locked again automitcally							#
+	thread is unblocked	when thread B unlock the muxtex			#
+																#
+/* critical section is ended */									#
+explicitly unlock the mutex										#
+
+
+other words:
+
+// safely examine the condition, prevent other threads from
+// altering it
+pthread_mutex_lock (&lock);
+while ( SOME-CONDITION is false)
+    pthread_cond_wait (&cond, &lock);
+
+// Do whatever you need to do when condition becomes true
+do_stuff();
+pthread_mutex_unlock (&lock);
+
+On the other hand, a thread, signaling the condition variable, typically looks like
+
+// ensure we have exclusive access to whathever comprises the condition
+pthread_mutex_lock (&lock);
+
+ALTER-CONDITION
+
+// Wakeup at least one of the threads that are waiting on the condition (if any)
+pthread_cond_signal (&cond);
+
+// allow others to proceed
+pthread_mutex_unlock (&lock)
+
+semaphores vs condition variables:
+==================================

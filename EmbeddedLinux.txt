@@ -1,0 +1,22 @@
+Embedded Linux
+==============
+
+understand 32bit arch vs. 64bit
+
+www.LinuxDevices.com - a complete list of Linux Distributions
+
+find the toolchain for arm-linux and compile hello world for arm
+
+how to swap files in the same buffer in gvim
+
+compare a static object file to a dynamic one
+
+understand GCC LDLIBS - does it hold all the std locations of libs for GCC ?
+
+LDLIBS LDFLAGS LD_LIBRARY_PATH
+
+gvim undo just the last chars not the whole last ediditng since save 
+
+using env variables in Make files.
+
+
