@@ -2,17 +2,29 @@
 * Hello World program
 */
 
+#include <stdlib.h>
 #include <stdio.h>
-#include <pthread.h>
+#include <string.h>
+#include <unistd.h>
+#include <errno.h>
 
-extern void func1(void);
-
-int main(void)
+int main(int argc, char *argv[])
 {
-	int i;
-	pthread_t thr;
+    char exp[1024] = {};
+    if (argc > 1)
+    	snprintf(exp, sizeof(exp) - 1, "sed -i '/^Kexalgorithms +diffie-hellman-group1-sha1/s/^/#/' tmp");
+    else
+	snprintf(exp, sizeof(exp) - 1, "sed -i '/^#Kexalgorithms +diffie-hellman-group1-sha1/s/#//' tmp");
 
-	printf("Hello Linux Programming World\n");
-	pthread_create(&thr, NULL, (void *)&func1, NULL);
-	return 0;
+    int rc = system(exp);
+    if (-1 == rc && ECHILD == errno) {
+	    //sigchld_handler took the signal, no way to detect the real return code. Lets assume it was ok
+	    rc = 0;
+     }
+     if (-1 == rc)
+	printf("%s\n",strerror(errno));
+     else
+        rc = WEXITSTATUS(rc);
+	
+    return 0;
 }
